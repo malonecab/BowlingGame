@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe BowlingGame, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+ describe '#score' do
+ 
+ 	subject { BowlingGame.new }
+ 	
+ 	it { expect(subject).to respond_to(:score) }
+
+ end
+
 end
