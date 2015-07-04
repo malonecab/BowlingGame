@@ -36,7 +36,7 @@ gem 'bson_ext'
 group :development, :test do
   gem 'rspec-rails'
 	gem 'guard-rspec'
-
+	gem 'database_cleaner'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
