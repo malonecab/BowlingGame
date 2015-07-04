@@ -8,10 +8,12 @@ class Frame
  	
 	field :hits, type: Array, default: -> { Array.new() }
 
-	validate :validate_hits
+	validate :validates_number_of_hits
 	
-	def validate_hits
-    errors.add(:hits, "to many tries") if hits.size > MAX_TRIES
+	def validates_number_of_hits
+		if hits.size > MAX_TRIES
+    	errors.add(:hits, "to many attempts, valid only #{MAX_TRIES}") 
+    end
   end
 
 	def hit(pins)
