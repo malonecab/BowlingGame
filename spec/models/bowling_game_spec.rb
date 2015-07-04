@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe BowlingGame, type: :model do
-  
-
- 
+   
  	subject { BowlingGame.new }
- 	
+
+ 	describe "associations" do
+    it { should embed_many(:frames) }
+  end
+
  	describe "public class methods" do
   	context "responds to its methods" do
  			it { expect(subject).to respond_to(:score) }
@@ -16,6 +18,7 @@ RSpec.describe BowlingGame, type: :model do
  		end
 
  	end
+
 
 end
 
