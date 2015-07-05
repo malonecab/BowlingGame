@@ -18,7 +18,7 @@ class BowlingGame
   			score += spare_score(index)
   			index += 2
   		else
-  			score += hits[index] + hits[index+1] 
+  			score += hits[index] + hits[index+1]
   			index += 2
   		end
   	end
@@ -29,8 +29,7 @@ class BowlingGame
   	hits.push pins
   end
 
- private 
-
+ private
 
  	def strike?(index)
  		hits[index] == 10
@@ -48,6 +47,6 @@ class BowlingGame
  	end
 
  	def spare_score(index)
-		score = 10 + hits[index+2]
+			score = 10 + hits[index+2]
 	end
 end
