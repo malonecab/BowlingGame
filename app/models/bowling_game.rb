@@ -2,14 +2,42 @@ class BowlingGame
   include Mongoid::Document
   include Mongoid::Timestamps
 
+
   field :hits, type: Array, default: -> { Array.new() }
 
   def score
-  	hits.inject(0) { |total, hit| total + hit }
+  	score = 0
+  	index = 0
+  	max_index = (hits.size == 12) ? 9 : hits.size-1
+
+  	while index <= max_index
+   		if strike?(hits[index])
+  			score += strike_score(index)	
+  		else
+  			score += hits[index]
+  		end
+  		index += 1
+  	end
+  	return score
   end
 
   def attempt(pins)
   	hits.push pins
   end
+
+ private 
+
+
+ 	def strike?(pins)
+ 		pins == 10
+ 	end
+
+ 	def strike_score(index)
+		score = 10
+		if (index+2) <= hits.size-1 
+			score += hits[index+1] + hits[index+2]
+		end
+		score
+ 	end
 
 end
