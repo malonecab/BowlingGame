@@ -8,19 +8,21 @@ class BowlingGame
   def score
   	score = 0
   	index = 0
-  	max_index = (hits.size == 12) ? 9 : hits.size-1
+  	max_index = (hits.size == 12) ? 10 : hits.size-1
 
-  	while index <= max_index
+  	while index < max_index
    		if strike?(index)
-  			score += strike_score(index)	
-  		elsif spare?(hits[index])
-
+  			score += strike_score(index)
+  			index += 1
+  		elsif spare?(index)
+  			score += spare_score(index)
+  			index += 2
   		else
-  			score += hits[index]
+  			score += hits[index] + hits[index+1] 
+  			index += 2
   		end
-  		index += 1
   	end
-  	return score
+  	score
   end
 
   def attempt(pins)
@@ -35,14 +37,17 @@ class BowlingGame
  	end
 
  	def spare?(index)
+ 		hits[index] + hits[index+1] == 10
  	end
 
  	def strike_score(index)
 		score = 10
 		if (index+2) <= hits.size-1 
 			score += hits[index+1] + hits[index+2]
-		end
-		score
+		end		
  	end
 
+ 	def spare_score(index)
+		score = 10 + hits[index+2]
+	end
 end
