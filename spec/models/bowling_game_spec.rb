@@ -30,6 +30,15 @@ RSpec.describe BowlingGame, type: :model do
         expect(subject.score).to be 30
       end
 
+      it '16 after 1 spare and 16 attempts with 6 pins down' do
+        subject.attempt(8)
+        subject.attempt(2)
+        subject.attempt(4)
+        subject.attempt(2)
+        16.times { subject.attempt(0) }
+        expect(subject.score).to be 20
+      end
+
       it '300 after 10 attempts with 10 pins down' do
         12.times { subject.attempt(10) }
         expect(subject.score).to be 300
@@ -37,8 +46,6 @@ RSpec.describe BowlingGame, type: :model do
  		end
 
  	end
-
-
 end
 
 
