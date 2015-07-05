@@ -11,8 +11,10 @@ class BowlingGame
   	max_index = (hits.size == 12) ? 9 : hits.size-1
 
   	while index <= max_index
-   		if strike?(hits[index])
+   		if strike?(index)
   			score += strike_score(index)	
+  		elsif spare?(hits[index])
+
   		else
   			score += hits[index]
   		end
@@ -28,8 +30,11 @@ class BowlingGame
  private 
 
 
- 	def strike?(pins)
- 		pins == 10
+ 	def strike?(index)
+ 		hits[index] == 10
+ 	end
+
+ 	def spare?(index)
  	end
 
  	def strike_score(index)
