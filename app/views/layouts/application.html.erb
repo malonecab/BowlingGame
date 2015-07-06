@@ -18,32 +18,21 @@
       <div class="container">
       <header id="header" class="row">
         <div class="twelve columns phone-two">
-          <nav id="menu" role="navigation" class="hide-for-small">
-            <ul id="mainNav" class="nav-bar">
-              <li><a href=""><i class="fa fa-home fa-1x"></i> Home</a></li>
-              <li><a href=""><i class="fa fa-user fa-1x"></i> About</a></li>
-            </ul>
-          </nav>
-            <!-- Toggle Menu -->
-            <p class="show-for-small">
-            <a class='sidebar-button button' id="sidebarButton" href="#sidebar" >Menu</a>
-           </p>
+          <%= render partial: "menu", locals: { mobile: false } %>
         </div>
       </header>
 
       <div class="row">
         <section role="main">
           <div class="row">
+            <div class="twelve columns">
+              <h1 id="site"><span itemprop="title">Track your Bowling Scores</span></h1>
+            <hr> 
             <%= yield %>
           </div>
         </section>
       <section id="sidebar" role="complementary">
-        <nav id="sideMenu" role="navigation">
-          <ul id="sideMainNav" class="nav-bar">
-              <li><a href=""><i class="fa fa-home fa-1x"></i> Home</a></li>
-              <li><a href=""><i class="fa fa-user fa-1x"></i> About</a></li>
-          </ul>
-        </nav>
+        <%= render partial: "menu", locals: { mobile: true } %>
       </section>        
       </div>
       <footer class="site-footer row" role="contentinfo">

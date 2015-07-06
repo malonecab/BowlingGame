@@ -1,0 +1,19 @@
+
+
+<% if mobile %>
+	<nav id="sideMenu" role="navigation">
+	  <ul id="sideMainNav" class="nav-bar">
+	    <%= render partial: "menu_items" %>
+	  </ul>
+	</nav>
+<% else %>
+	<nav id="menu" role="navigation" class="hide-for-small">
+		<ul id="mainNav" class="nav-bar">
+		  <%= render partial: "menu_items" %>
+		</ul>
+	</nav>
+	<p class="show-for-small">
+		<a class='sidebar-button button' id="sidebarButton" href="#sidebar" >Menu</a>
+	</p>
+
+<% end %>
