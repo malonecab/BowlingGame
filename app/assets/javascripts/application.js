@@ -12,5 +12,19 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require turbolinks
 //= require_tree .
+
+    (function() {
+        var path = '//easy.myfonts.net/v2/js?sid=86516(font-family=Bowling+Plain)&key=VFX6tzbj6g',
+            protocol = ('https:' == document.location.protocol ? 'https:' : 'http:'),
+            trial = document.createElement('script');
+        trial.type = 'text/javascript';
+        trial.async = true;
+        trial.src = protocol + path;
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(trial);
+    })();
+    
+$(function(){ $(document).foundation(); });
