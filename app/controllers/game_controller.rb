@@ -4,6 +4,6 @@ class GameController < ApplicationController
 	end
 
 	def show
-		#@game = BowlingGame.new
 	end
+
 end
