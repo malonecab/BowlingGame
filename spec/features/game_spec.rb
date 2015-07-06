@@ -13,8 +13,7 @@ describe "GET /" do
     end
 
     it "has 10 pins available" do
-      visit game_path(1,1)
-
+      visit new_game_path
       expect(page).to have_css('div.btn_pins', count: 11)
     end
   end
