@@ -1,14 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Bowling</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en" itemscope itemtype="http://schema.org/Product"><!--<![endif]-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
+    <title><%= content_for?(:title) ? yield(:title) : "Bowling Score!" %></title>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body id="page" class="off-canvas hide-extras">
+      <div class="container">
+      <header id="header" class="row">
+        <div class="twelve columns phone-two">
+          <nav id="menu" role="navigation" class="hide-for-small">
+            <ul id="mainNav" class="nav-bar">
+              <li><a href=""><i class="fa fa-home fa-1x"></i> Home</a></li>
+              <li><a href=""><i class="fa fa-user fa-1x"></i> About</a></li>
+            </ul>
+          </nav>
+            <!-- Toggle Menu -->
+            <p class="show-for-small">
+            <a class='sidebar-button button' id="sidebarButton" href="#sidebar" >Menu</a>
+           </p>
+        </div>
+      </header>
+
+      <div class="row">
+        <section role="main">
+          <div class="row">
+            <%= yield %>
+          </div>
+        </section>
+      <section id="sidebar" role="complementary">
+        <nav id="sideMenu" role="navigation">
+          <ul id="sideMainNav" class="nav-bar">
+              <li><a href=""><i class="fa fa-home fa-1x"></i> Home</a></li>
+              <li><a href=""><i class="fa fa-user fa-1x"></i> About</a></li>
+          </ul>
+        </nav>
+      </section>        
+      </div>
+      <footer class="site-footer row" role="contentinfo">
+        <div class="twelve columns">
+        <hr>
+          &copy; 2015. <a href="index.htm">Bowling</a> 
+          <a href="http://freehtml5templates.olympe.in/template-foundation-framework.htm" title="Free HTML5 Responsive Template Foundation" target="blank_">
+          <i class="fa fa-html5 fa-1x"></i> Free HTML5 Responsive Template Foundation 
+          <i class="fa fa-css3 fa-1x"></i> </a> <br><br><a href="http://foundation.zurb.com/develop/download.html" target="blank_">
+          <i class="fa fa-github fa-1x"></i> Built with Foundation Framework</a><br />
+        </div>
+      </footer>      
+    </div>
+  </body>
 </html>
