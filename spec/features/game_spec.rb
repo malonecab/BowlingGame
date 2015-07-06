@@ -22,7 +22,15 @@ describe "GET /" do
   end
 
   context "throw the first ball" do
-    it "kock down 3 pins" do
+    it "and saved the hit" do
+      visit new_game_path
+      click_link("btn-pins-0")
+
+      game_id = URI.parse(current_url).request_uri.split("/")[2]
+      expect(BowlingGame.find(game_id).hits.size).to eq 1 
+    end
+
+    it "knocked down 3 pins" do
       visit new_game_path
       click_link("btn-pins-3")
       expect(page).to have_content("Round 1")
