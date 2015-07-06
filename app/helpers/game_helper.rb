@@ -9,7 +9,7 @@ module GameHelper
 	end
 
 	def next_path_after_attempt(game_id, round, ball, available_pins, pins)
-		if (pins == 10 || (pins <= available_pins && ball == 2))
+		if pins == 10 || ball == 2
 			update_game_path(game_id, round+1, 1)
 		else	
 			update_game_path(game_id, round, ball+1)
