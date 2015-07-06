@@ -5,6 +5,7 @@ class GameController < ApplicationController
 
 	def show
 		round_and_ball
+		@pins_availables = 10
 	end
 
 
