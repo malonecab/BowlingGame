@@ -1,12 +1,13 @@
 <% (0..@pins_availables).each do |pins| %>
 <div class="large-4 columns left">
-	<a href="">
+	<%= link_to update_game_path(id, round, ball), method: :put, id: "btn-pins-#{pins}" do %>
+
 		<div class="btn_pins panel">
 			<span class="large"><%= pins %></span>&nbsp;
 				<% pins.times do %>
 					<span class="pins right large">X</span>
 				<% end %>
 		</div>
-	</a>
+	<% end %>
 </div>
 <% end %>

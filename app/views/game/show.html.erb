@@ -7,6 +7,7 @@
 	<h3>Please, Select pins knocked down</h3>
 	
 	<div class="row">
-		<%= render partial: "pins_cards", locals: { pins: @pins } %>		
+		<%= render partial: "pins_cards", 
+			locals: { pins: @pins, id: @game.id.to_s,round: @round, ball: @ball } %>		
 	</div>
 </div>
