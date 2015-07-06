@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
    root 'game#index'
-   get 'round/:round_id/ball/:ball_id', to: 'game#new', as: 'new_game', round_id: /\d{2}/, ball_id: /[1-2]/
+   get '/round/:round_id/ball/:ball_id', to: 'game#show', as: 'game', constraints: { round_id: /\d{1,2}/, ball_id: /[1-2]/ }
 end
