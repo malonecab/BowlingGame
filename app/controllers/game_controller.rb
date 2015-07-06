@@ -7,7 +7,8 @@ class GameController < ApplicationController
 		render :show
 	end
 
-	def show
+	def update
+		@pins_availables = 7
 	end
 
 
@@ -20,6 +21,6 @@ class GameController < ApplicationController
 	end
 
 	def get_game
-		#@game = BowlingGame.
+		@game = BowlingGame.find(params[:id]) rescue BowlingGame.new
 	end
 end
