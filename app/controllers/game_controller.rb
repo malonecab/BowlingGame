@@ -1,6 +1,8 @@
 class GameController < ApplicationController
+	before_filter :round_and_ball
 
-	def index
+	def new
+		redirect_to show_game_url(@round, @ball)
 	end
 
 	def show
@@ -12,7 +14,7 @@ class GameController < ApplicationController
 	private
 
 	def round_and_ball
-		@round = params[:round_id]
-		@ball = params[:ball_id]
+		@round = params[:round_id] || 1
+		@ball = params[:ball_id] || 1
 	end
 end
