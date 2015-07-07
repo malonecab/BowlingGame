@@ -28,6 +28,14 @@
             <div class="twelve columns">
               <h1 id="site"><span itemprop="title">Track your Bowling Scores</span></h1>
             <hr> 
+             <% flash.each do |name, msg| %>
+              <% if msg.is_a?(String) %>
+                <div data-alert class="alert-box round <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+                  <%= content_tag :div, msg %>
+                  <a href="#" class="close">&times;</a>
+                </div>
+              <% end %>
+            <% end %>   
             <%= yield %>
           </div>
         </section>

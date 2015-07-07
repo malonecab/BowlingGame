@@ -41,7 +41,9 @@ describe "GET /" do
     it "page shows knocked down und remain standing pins" do
       visit create_game_path
       click_link("btn-pins-2")
-      expect(find("notice").text).to eq "2 pins knocked down"
-      expect(find("notice").text).to eq "8 still up"       
+      notice_text = find(:css, ".alert-box.round.success").text
+      expect(notice_text).to include "2 pins knocked down"
+      expect(notice_text).to include "8 pins still up"
+    end     
   end
 end

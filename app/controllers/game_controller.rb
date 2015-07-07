@@ -1,4 +1,6 @@
 class GameController < ApplicationController
+	include ActionView::Helpers::TextHelper
+
 	before_filter :calculate_round_ball_and_pins
 	before_filter :get_game, :except => [:new] 
 
@@ -8,8 +10,12 @@ class GameController < ApplicationController
 	end
 
 	def update
-		@game.attempt(params[:pins])
-		@game.save
+		pins = params[:pins]
+		@game.attempt(pins)
+		if @game.save
+			flash[:notice] = "#{pluralize(pins, 'pin')} knocked down.\
+						#{pluralize(@pins_availables, 'pin')} still up"
+		end
 	end
 
 
