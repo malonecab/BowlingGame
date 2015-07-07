@@ -1,9 +1,10 @@
 
 <div class="twelve columns">
-	<h2>Round <%= @round %>, Ball <%= @ball %></h2>
-	
-	<h3>Please, Select pins knocked down</h3>
-	
+	<div class="row">
+		<h3 class="left">Please, Select pins knocked down</h3>
+		<span class="m right">Round <%= @round %>, Ball <%= @ball %></span>
+	</div>
+
 	<div class="row">
 		<%= render partial: "pins_cards", 
 			locals: { pins: @pins, id: @game.id.to_s,round: @round, ball: @ball } %>		

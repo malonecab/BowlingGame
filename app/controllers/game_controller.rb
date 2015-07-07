@@ -23,9 +23,9 @@ class GameController < ApplicationController
 	private
 	def get_notice(pins_down)
 		if pins_down == 10
-			notice = "STRIKE!"
+			"STRIKE!"
 		elsif spare?(pins_down)
-			notice = "SPARE!"
+			"SPARE!"
 		else
 			notice = "#{pluralize(pins_down, 'pin')} knocked down."
 			notice += " #{@pins_availables} still up" unless new_round?			
@@ -49,7 +49,6 @@ class GameController < ApplicationController
 		if params[:pins].present? && @ball.to_i.even?
 			@pins_availables -= params[:pins].to_i
 		end
-
 	end
 
 	def get_game
