@@ -9,7 +9,7 @@ describe "GET /" do
       visit root_path
       click_link("btn-start")
       expect(page).to have_content("Round 1")
-      expect(page).to have_content("Ball 1")
+      expect(page).to have_content("ball 1")
     end
 
     it "has 10 pins available" do
@@ -34,7 +34,7 @@ describe "GET /" do
       visit create_game_path
       click_link("btn-pins-3")
       expect(page).to have_content("Round 1")
-      expect(page).to have_content("Ball 2")
+      expect(page).to have_content("ball 2")
       expect(page).to have_css('div.btn_pins', count: 8)
     end
 
@@ -95,8 +95,7 @@ describe "GET /" do
         click_link("btn-pins-10")
         notice_text = find(:css, ".alert-box.round.success").text
         expect(notice_text).to include "STRIKE!"
-        expect(page).to have_content("Round 11")
-        expect(page).to have_content("Ball 1")
+        expect(page).to have_content("Extra ball 1")
       end
       it "shows extra ball 2 after extra ball 1" do
         visit create_game_path
@@ -104,10 +103,12 @@ describe "GET /" do
           click_link("btn-pins-0")
           click_link("btn-pins-8")
         }
+        click_link("btn-pins-10")
+        puts page.body
+        
         click_link("btn-pins-5")
-        click_link("btn-pins-9")        
-        expect(page).to have_content("Round 11")
-        expect(page).to have_content("Ball 2")
+        
+        expect(page).to have_content("Extra ball 2")
       end
 
     end
