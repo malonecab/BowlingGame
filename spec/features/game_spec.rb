@@ -44,6 +44,23 @@ describe "GET /" do
       notice_text = find(:css, ".alert-box.round.success").text
       expect(notice_text).to include "2 pins knocked down"
       expect(notice_text).to include "8 still up"
-    end     
+    end 
+  end
+
+  context "special attempts" do
+    it "strike if 10 pins knocked down" do
+      visit create_game_path
+      click_link("btn-pins-10")
+      notice_text = find(:css, ".alert-box.round.success").text
+      expect(notice_text).to include "STRIKE!"
+    end
+
+    it "score if 10 pins knocked down in a round" do
+      visit create_game_path
+      click_link("btn-pins-3")
+      click_link("btn-pins-7")
+      notice_text = find(:css, ".alert-box.round.success").text
+      expect(notice_text).to include "SPARE!"
+    end
   end
 end
