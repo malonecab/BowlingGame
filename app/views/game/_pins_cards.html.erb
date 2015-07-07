@@ -1,6 +1,7 @@
 <% (0..@pins_availables).each do |pins| %>
 <div class="large-4 columns left">
-	<% next_game_path = next_path_after_attempt(@game.id.to_s, round, ball, @pins_availables, pins) %> 
+	<% next_game_path = next_path_after_attempt(
+		@game.id.to_s, round.to_i, ball.to_i, @pins_availables.to_i, pins) %> 
 	<%= link_to next_game_path, method: :put, id: "btn-pins-#{pins}" do %>
 
 		<div class="btn_pins panel">

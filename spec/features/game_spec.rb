@@ -43,7 +43,7 @@ describe "GET /" do
       click_link("btn-pins-2")
       notice_text = find(:css, ".alert-box.round.success").text
       expect(notice_text).to include "2 pins knocked down"
-      expect(notice_text).to include "8 pins still up"
+      expect(notice_text).to include "8 still up"
     end     
   end
 end
