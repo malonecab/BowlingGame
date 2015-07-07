@@ -75,14 +75,42 @@ describe "GET /" do
         expect(page).to have_content("GAME FINISHED!")
       end
 
-     it "shows final score" do
+      it "shows final score" do
         visit create_game_path
         10.times {
           click_link("btn-pins-0")
           click_link("btn-pins-8")
         }
         expect(page).to have_content("Your final score is 80 points")
-      end      
+      end    
     end
+
+    context "with 2 extra balls" do
+      it "shows extra round ball 1 when strike in round 10" do
+        visit create_game_path
+        9.times {
+          click_link("btn-pins-0")
+          click_link("btn-pins-8")
+        }
+        click_link("btn-pins-10")
+        notice_text = find(:css, ".alert-box.round.success").text
+        expect(notice_text).to include "STRIKE!"
+        expect(page).to have_content("Round 11")
+        expect(page).to have_content("Ball 1")
+      end
+      it "shows extra ball 2 after extra ball 1" do
+        visit create_game_path
+        9.times {
+          click_link("btn-pins-0")
+          click_link("btn-pins-8")
+        }
+        click_link("btn-pins-5")
+        click_link("btn-pins-9")        
+        expect(page).to have_content("Round 11")
+        expect(page).to have_content("Ball 2")
+      end
+
+    end
+
   end
 end
