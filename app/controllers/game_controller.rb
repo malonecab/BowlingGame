@@ -1,35 +1,33 @@
 class GameController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
-	before_filter :get_game, :except => [:create] 	
-	before_filter :calculate_round_ball_and_pins
-
-
+	before_filter :set_params
+	before_filter :get_game, :calculate_round_ball_and_pins, :except => [:create] 	
+	
 	def create
 		@game = BowlingGame.create
 		render :show
 	end
 
 	def update
-		pins = params[:pins].to_i
-		@game.attempt(pins)
+		@game.attempt(@pins_down)
 		if @game.save
 			if game_finished?
 				redirect_to finished_game_url(@game.id.to_s)
 			else
-				flash[:notice] = get_notice(pins)
+				flash[:notice] = get_notice(@pins_down)
 				render :show
 			end
 		end
 	end
 
 	def finished
-
+		false
 	end
 
 	private
 	def game_finished?
-		@round.to_i > 10
+		false
 	end
 
 	def get_notice(pins_down)
@@ -43,10 +41,6 @@ class GameController < ApplicationController
 		end
 	end
 
-	def strike?(pins_down)
-		pins_down == 10
-	end
-
 	def spare?(pins_down)
 		last_hit = @game.hits[-2].to_i
 		(pins_down + last_hit) == 10
@@ -57,16 +51,29 @@ class GameController < ApplicationController
 	end
 
 	def calculate_round_ball_and_pins
-		@round = params[:round_id] || 1
-		@ball = params[:ball_id] || 1
-		@pins_availables = 10
-
-		if params[:pins].present? && @ball.to_i.even?
-			@pins_availables -= params[:pins].to_i
+		if strike?(@pins_down) || @ball == 2
+			@round = @round + 1
+			@ball = 1
+		else
+			@ball =  @ball + 1
+			@pins_availables = @pins_availables - @pins_down
 		end
+
+	end
+
+	def strike?(pins_down)
+		pins_down == 10
 	end
 
 	def get_game
 		@game = BowlingGame.find(params[:id]) rescue BowlingGame.new
 	end
+
+	def set_params
+		@round = params[:round_id].present? ? params[:round_id].to_i : 1
+		@ball =  params[:ball_id].present? ? params[:ball_id].to_i : 1
+		@pins_down = params[:pins].present? ? params[:pins].to_i : 0
+		@pins_availables = 10
+	end
+
 end

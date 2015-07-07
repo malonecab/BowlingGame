@@ -7,6 +7,7 @@
 
 	<div class="row">
 		<%= render partial: "pins_cards", 
-			locals: { pins: @pins, id: @game.id.to_s,round: @round, ball: @ball } %>		
+			locals: { pins_availables: @pins_availables, game_id: @game.id.to_s, 
+				round: @round, ball: @ball } %>		
 	</div>
 </div>
