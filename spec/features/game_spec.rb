@@ -47,7 +47,7 @@ describe "GET /" do
     end 
   end
 
-  context "special attempts" do
+  context "special shoots" do
     it "strike if 10 pins knocked down" do
       visit create_game_path
       click_link("btn-pins-10")
@@ -61,6 +61,19 @@ describe "GET /" do
       click_link("btn-pins-7")
       notice_text = find(:css, ".alert-box.round.success").text
       expect(notice_text).to include "SPARE!"
+    end
+  end
+
+  describe "finish game" do
+    context "without extra balls" do
+      it "shows game finished" do
+        visit create_game_path
+        10.times {
+          click_link("btn-pins-4")
+          click_link("btn-pins-6")
+        }
+        expect(page).to have_content("GAME FINISHED!")
+      end
     end
   end
 end
