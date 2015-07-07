@@ -97,6 +97,7 @@ describe "GET /" do
         expect(notice_text).to include "STRIKE!"
         expect(page).to have_content("Extra ball 1")
       end
+
       it "shows extra ball 2 after extra ball 1" do
         visit create_game_path
         9.times {
@@ -104,8 +105,6 @@ describe "GET /" do
           click_link("btn-pins-8")
         }
         click_link("btn-pins-10")
-        puts page.body
-        
         click_link("btn-pins-5")
         
         expect(page).to have_content("Extra ball 2")
