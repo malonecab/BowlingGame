@@ -16,7 +16,7 @@ describe "GET /" do
       visit create_game_path
       expect(page).to have_css('div.btn_pins', count: 11)
 
-      expect(page.find('#btn-pins-0')[:href]).to match(/\/round\/1\/ball\/2\/hits\/0/)
+      expect(page.find('#btn-pins-0')[:href]).to match(/\/round\/1\/ball\/1\/hits\/0/)
       expect(page.find('#btn-pins-10')[:href]).to match(/\/round\/1\/ball\/1\/hits\/10/) 
     end
   end
@@ -113,4 +113,5 @@ describe "GET /" do
     end
 
   end
+
 end
