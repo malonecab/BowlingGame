@@ -37,5 +37,11 @@ describe "GET /" do
       expect(page).to have_content("Ball 2")
       expect(page).to have_css('div.btn_pins', count: 8)
     end
+
+    it "page shows knocked down und remain standing pins" do
+      visit create_game_path
+      click_link("btn-pins-2")
+      expect(find("notice").text).to eq "2 pins knocked down"
+      expect(find("notice").text).to eq "8 still up"       
   end
 end
