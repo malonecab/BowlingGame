@@ -1,8 +1,9 @@
 class GameController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
+	before_filter :get_game, :except => [:create] 	
 	before_filter :calculate_round_ball_and_pins
-	before_filter :get_game, :except => [:new] 
+
 
 	def create
 		@game = BowlingGame.create
@@ -13,26 +14,27 @@ class GameController < ApplicationController
 		pins = params[:pins]
 		@game.attempt(pins)
 		if @game.save
-			flash[:notice] = "#{pluralize(pins, 'pin')} knocked down.\
-						#{pluralize(@pins_availables, 'pin')} still up"
+			flash[:notice] = "#{pluralize(pins, 'pin')} knocked down."
+			flash[:notice] += " #{@pins_availables} still up" unless new_round?			
+			render :show			
 		end
 	end
 
 
 	private
+	def new_round?
+		@ball.to_i.odd?
+	end
 
 	def calculate_round_ball_and_pins
 		@round = params[:round_id] || 1
 		@ball = params[:ball_id] || 1
 		@pins_availables = 10
 
-		return if @ball == 1
-		
-		if @ball.to_i.even?
+		if params[:pins].present? && @ball.to_i.even?
 			@pins_availables -= params[:pins].to_i
-		else
-		 	@pins_availables -= @game.hits.last
-		 end
+		end
+
 	end
 
 	def get_game
