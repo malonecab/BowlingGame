@@ -26,7 +26,7 @@ class GameController < ApplicationController
 
 	private
 	def game_finished?
-		@round == 10 && @ball == 1 && @pins_down
+		@round == 11 && @ball == 1
 	end
 
 	def get_notice(pins_down)
