@@ -11,17 +11,32 @@ class GameController < ApplicationController
 	end
 
 	def update
-		pins = params[:pins]
+		pins = params[:pins].to_i
 		@game.attempt(pins)
 		if @game.save
-			flash[:notice] = "#{pluralize(pins, 'pin')} knocked down."
-			flash[:notice] += " #{@pins_availables} still up" unless new_round?			
+			flash[:notice] = get_notice(pins)
 			render :show			
 		end
 	end
 
 
 	private
+	def get_notice(pins_down)
+		if pins_down == 10
+			notice = "STRIKE!"
+		elsif spare?(pins_down)
+			notice = "SPARE!"
+		else
+			notice = "#{pluralize(pins_down, 'pin')} knocked down."
+			notice += " #{@pins_availables} still up" unless new_round?			
+		end
+	end
+
+	def spare?(pins_down)
+		last_hit = @game.hits[-2].to_i
+		(pins_down + last_hit) == 10
+	end
+
 	def new_round?
 		@ball.to_i.odd?
 	end
