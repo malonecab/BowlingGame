@@ -74,6 +74,15 @@ describe "GET /" do
         }
         expect(page).to have_content("GAME FINISHED!")
       end
+
+     it "shows final score" do
+        visit create_game_path
+        10.times {
+          click_link("btn-pins-0")
+          click_link("btn-pins-8")
+        }
+        expect(page).to have_content("Your final score is 80 points")
+      end      
     end
   end
 end
