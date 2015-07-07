@@ -14,15 +14,26 @@ class GameController < ApplicationController
 		pins = params[:pins].to_i
 		@game.attempt(pins)
 		if @game.save
-			flash[:notice] = get_notice(pins)
-			render :show			
+			if game_finished?
+				redirect_to finished_game_url(@game.id.to_s)
+			else
+				flash[:notice] = get_notice(pins)
+				render :show
+			end
 		end
 	end
 
+	def finished
+
+	end
 
 	private
+	def game_finished?
+		@round.to_i > 10
+	end
+
 	def get_notice(pins_down)
-		if pins_down == 10
+		if strike? (pins_down)
 			"STRIKE!"
 		elsif spare?(pins_down)
 			"SPARE!"
@@ -30,6 +41,10 @@ class GameController < ApplicationController
 			notice = "#{pluralize(pins_down, 'pin')} knocked down."
 			notice += " #{@pins_availables} still up" unless new_round?			
 		end
+	end
+
+	def strike?(pins_down)
+		pins_down == 10
 	end
 
 	def spare?(pins_down)
