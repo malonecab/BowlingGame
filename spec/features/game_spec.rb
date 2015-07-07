@@ -3,6 +3,9 @@ describe "GET /" do
     visit root_path
     expect(page).to have_css("section h1", text: "Track your Bowling Scores")    
   end
+end
+
+describe "PUT /game" do
 
   context "start game" do
     it "show actual Round and Ball" do
@@ -86,7 +89,7 @@ describe "GET /" do
     end
 
     context "with 2 extra balls" do
-      it "shows extra round ball 1 when strike in round 10" do
+      it "shows the frist one when strike in last round" do
         visit create_game_path
         9.times {
           click_link("btn-pins-0")
@@ -98,7 +101,7 @@ describe "GET /" do
         expect(page).to have_content("Extra ball 1")
       end
 
-      it "shows extra ball 2 after extra ball 1" do
+      it "shows the second after the first one" do
         visit create_game_path
         9.times {
           click_link("btn-pins-0")
@@ -110,6 +113,11 @@ describe "GET /" do
         expect(page).to have_content("Extra ball 2")
       end
 
+      it "perfect game with 300 points!" do
+        visit create_game_path
+        12.times { click_link("btn-pins-10") }
+        expect(page).to have_content("Your final score is 300 points")
+      end
     end
 
   end
