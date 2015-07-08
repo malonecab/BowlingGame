@@ -30,6 +30,8 @@ Please run `bundle show` for detailed versions of the RubyGems used in the proje
 
 The follwing guide is intended to be a living document. *It has to be adjusted in case anything changes.* Should you discover any problems please edit this file to reflect the correct setup process after you figured out a solution. Please bear in mind to *update this file should you change anything in the setup process*, so others don't have to waste their time figuring out what changed.
 
+### Clone
+    git clone git://github.com/malonecab/bowlingGame
 
 ### Installing dependencies
     Set up the config/mongoid.yml with your mongodb server parameters 
