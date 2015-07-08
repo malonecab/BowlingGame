@@ -2,7 +2,8 @@ class GameController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
 	before_filter :set_params
-	before_filter :get_game, :calculate_round_ball_and_pins, :except => [:create] 	
+	before_filter :get_game, :except => [:create]
+	before_filter :calculate_round_ball_and_pins, :only => [:update] 	
 	
 	def create
 		@game = BowlingGame.create
@@ -11,17 +12,19 @@ class GameController < ApplicationController
 
 	def update
 		@game.attempt(@pins_down)
-		if @game.save
+		@game.save
+		if game_finished?
+			redirect_to finished_game_url(@game.id.to_s)
+		else
+			flash[:notice] = get_notice(@pins_down)
+			redirect_to show_game_url(@game.id.to_s, @round, @ball)				
+		end
+	end
 
-			if game_finished?
-				redirect_to finished_game_url(@game.id.to_s)
-			else
-				flash[:notice] = get_notice(@pins_down)
-				if strike?(@pins_down) || extra_round?
-					redirect_to show_game_url(@game.id.to_s, @round, @ball)
-				else
-					render :show
-				end
+	def show
+		if last_hit = @game.hits.last.to_i
+			if last_hit < 10
+				@pins_availables -= last_hit
 			end
 		end
 	end
@@ -62,7 +65,6 @@ class GameController < ApplicationController
 			@ball = 1
 		elsif @pins_down >= 0
 			@ball = @ball + 1
-			@pins_availables = @pins_availables - @pins_down
 		end
 	end
 
