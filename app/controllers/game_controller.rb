@@ -12,11 +12,12 @@ class GameController < ApplicationController
 	def update
 		@game.attempt(@pins_down)
 		if @game.save
+
 			if game_finished?
 				redirect_to finished_game_url(@game.id.to_s)
 			else
 				flash[:notice] = get_notice(@pins_down)
-				if strike? @pins_down
+				if strike?(@pins_down) || extra_round?
 					redirect_to show_game_url(@game.id.to_s, @round, @ball)
 				else
 					render :show
@@ -31,7 +32,7 @@ class GameController < ApplicationController
 	private
 	def game_finished?
 		(@round == 11 && @ball == 1 && @pins_down < 10) ||
-		(@round == 11 && @ball == 2)
+		(@round == 11 && @ball == 3)
 	end
 
 	def get_notice(pins_down)
@@ -40,8 +41,7 @@ class GameController < ApplicationController
 		elsif spare? pins_down
 			"SPARE!"
 		else
-			notice = "#{pluralize(pins_down, 'pin')} knocked down."
-			notice += " #{@pins_availables} still up" unless new_round?			
+			"#{pluralize(pins_down, 'pin')} knocked down."		
 		end
 	end
 
@@ -55,11 +55,13 @@ class GameController < ApplicationController
 	end
 
 	def calculate_round_ball_and_pins
-		if strike?(@pins_down) || @ball == 2
+		if extra_round? && @pins_down >= 0
+			@ball = @ball + 1
+		elsif strike?(@pins_down) || @ball == 2
 			@round = @round + 1
 			@ball = 1
 		elsif @pins_down >= 0
-			@ball =  @ball + 1
+			@ball = @ball + 1
 			@pins_availables = @pins_availables - @pins_down
 		end
 	end
