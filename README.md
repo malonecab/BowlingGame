@@ -49,7 +49,7 @@ The project has model and integration tests written in RSpec
 
 Running the RSpec tests:
 
-    bundle exec rspec spec/
+    rspec spec/
 
 Continues testing with Guard
 
