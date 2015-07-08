@@ -21,7 +21,7 @@ E-Mail: <jariquelme@gmail.com><br />
 * **Testing:** RSpec, Capybara
 * **Server automation:** Puppet
 * **Version Control:** Git
-* **Gem versioning: RVM
+* **Gem versioning:** RVM
 
 Please run `bundle show` for detailed versions of the RubyGems used in the project.
 
