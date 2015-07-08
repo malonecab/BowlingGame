@@ -107,9 +107,7 @@ describe "PUT /game" do
           click_link("btn-pins-8")
         }
         click_link("btn-pins-10")
-
         click_link("btn-pins-1")
-        click_link("btn-pins-2")
         
         expect(page).to have_content("Extra ball 2")
       end
@@ -117,7 +115,7 @@ describe "PUT /game" do
       it "perfect game with 300 points!" do
         visit create_game_path
         12.times { click_link("btn-pins-10") }
-puts page.body
+
         expect(page).to have_content("Your final score is 300 points")
       end
 
