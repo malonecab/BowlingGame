@@ -46,7 +46,6 @@ describe "PUT /game" do
       click_link("btn-pins-2")
       notice_text = find(:css, ".alert-box.round.success").text
       expect(notice_text).to include "2 pins knocked down"
-      expect(notice_text).to include "8 still up"
     end 
   end
 
@@ -67,7 +66,7 @@ describe "PUT /game" do
     end
   end
 
-  describe "finish game" do
+  describe "finish game" do  
     context "without extra balls" do
       it "shows game finished" do
         visit create_game_path
@@ -88,8 +87,8 @@ describe "PUT /game" do
       end    
     end
 
-    context "with 2 extra balls" do
-      it "shows the frist one when strike in last round" do
+    context "with 2 extra balls" do     
+      it "shows the first one when strike in last round" do
         visit create_game_path
         9.times {
           click_link("btn-pins-0")
@@ -108,7 +107,9 @@ describe "PUT /game" do
           click_link("btn-pins-8")
         }
         click_link("btn-pins-10")
-        click_link("btn-pins-5")
+
+        click_link("btn-pins-1")
+        click_link("btn-pins-2")
         
         expect(page).to have_content("Extra ball 2")
       end
@@ -116,8 +117,10 @@ describe "PUT /game" do
       it "perfect game with 300 points!" do
         visit create_game_path
         12.times { click_link("btn-pins-10") }
+puts page.body
         expect(page).to have_content("Your final score is 300 points")
       end
+
     end
 
   end
