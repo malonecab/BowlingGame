@@ -74,7 +74,7 @@ describe "PUT /game" do
           click_link("btn-pins-4")
           click_link("btn-pins-6")
         }
-        expect(page).to have_content("GAME FINISHED!")
+        expect(page).to have_content("Game finished!")
       end
 
       it "shows final score" do
@@ -83,7 +83,7 @@ describe "PUT /game" do
           click_link("btn-pins-0")
           click_link("btn-pins-8")
         }
-        expect(page).to have_content("Your final score is 80 points")
+        expect(page).to have_content(" score: 80 points")
       end    
     end
 
@@ -116,7 +116,7 @@ describe "PUT /game" do
         visit create_game_path
         12.times { click_link("btn-pins-10") }
 
-        expect(page).to have_content("Your final score is 300 points")
+        expect(page).to have_content(" score: 300 points")
       end
 
     end
