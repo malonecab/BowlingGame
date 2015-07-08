@@ -41,14 +41,11 @@ class BowlingGame
 
  	def strike_score(index)
 		score = 10
-    begin
+   
 		  if (index+2) <= hits.size-1 
 			 score += hits[index+1].to_i + hits[index+2].to_i
 		  end
-    rescue
-      puts self.hits
-      puts index
-    end		
+    score		
  	end
 
  	def spare_score(index)
