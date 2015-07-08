@@ -6,7 +6,7 @@ Bowling Game is a demo page
 
 J.A. Riquelme
 
-E-Mail: <jariquelme@google.com><br />
+E-Mail: <jariquelme@gmail.com><br />
 
 
 ## Synopsis
