@@ -1,11 +1,12 @@
 
 
 <div class="twelve columns">
-	<div class="row">		
-		<span class="xl right">GAME FINISHED!</span>
+	<div class="row text-center">		
+		<span class="large">Game finished!</span>
 	</div>
 
-	<div class="row">
-		Your final score is <%= @game.score %> points	
+	<div class="row text-center">
+		<span class="pins xl">score: </span>
+		<span class="pins xl"><%= @game.score %></span><span class="pins xl"> points</span>	
 	</div>
 </div>
