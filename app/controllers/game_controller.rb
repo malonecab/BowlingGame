@@ -6,10 +6,8 @@ class GameController < ApplicationController
   before_filter :calculate_round_ball_and_pins, :only => [:update]  
   
   def create
-    @ball = 1
-    @round = 10
     @game = BowlingGame.create
-    render :show
+    redirect_to show_game_url(@game.id.to_s, @round, @ball)
   end
 
   def update
@@ -24,8 +22,9 @@ class GameController < ApplicationController
   end
 
   def show
-    if last_hit = @game.hits.last.to_i
-      @pins_availables -= last_hit if last_hit < 10
+    if @ball > 1 && !extra_round?  
+      last_hit = @game.hits.last.to_i  
+      @pins_availables -=  last_hit if last_hit < 10
     end
   end
 
