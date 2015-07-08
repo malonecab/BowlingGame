@@ -3,7 +3,7 @@ class GameController < ApplicationController
 
   before_filter :set_params
   before_filter :get_game, :except => [:create]
-  before_filter :calculate_round_ball_and_pins, :only => [:update]  
+  before_filter :calculate_round_and_ball, :only => [:update]  
   
   def create
     @game = BowlingGame.create
@@ -52,7 +52,7 @@ class GameController < ApplicationController
     strike?(pins_down + last_hit)
   end
 
-  def calculate_round_ball_and_pins
+  def calculate_round_and_ball
     if extra_round? && @pins_down >= 0
       @ball = @ball + 1
     elsif strike?(@pins_down) || @ball == 2
